@@ -69,8 +69,17 @@ module Rdd
         return
       end
 
-      #Rdd::Client.new(options)
+      stdout.puts "Getting Github statistics for #{options[:after].strftime('%F %T')} UTC - #{options[:before].strftime('%F %T')} UTC"
+      result = Rdd::Client.new(options).query
+      stdout.puts "Results (~#{(result[:end] - result[:start]).to_i} seconds):"
 
+      print result[:response]
+
+    end
+
+    def self.print(response)
+      line_no = 0
+      response.map { |repo_name, points| puts "#{line_no = line_no + 1} #{repo_name} - #{points} points" }
     end
 
   end
