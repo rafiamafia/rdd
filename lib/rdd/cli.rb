@@ -1,7 +1,6 @@
 require 'optparse'
 require 'open-uri'
 require 'zlib'
-require 'yajl'
 require 'pry'
 require 'rdd/client'
 
@@ -27,9 +26,9 @@ module Rdd
 
         opts.on("-a", "--after=AFTER", "Date to start search at, ISO8601 or YYYY-MM-DD format", "Default: 28 days ago") do |after|
           begin
-            DateTime.iso8601 after
+            DateTime.iso8601(after) && DateTime.parse(after)
           rescue
-            stderr.puts "please select a valid after date"
+            stderr.puts "Please select a valid after date in ISO8601 or YYYY-MM-DD format"
             return
           end
           options[:after] = DateTime.parse(after)
@@ -38,9 +37,9 @@ module Rdd
 
         opts.on("-b", "--before=BEFORE", "ISO8601 Date to end search at, ISO8601 or YYYY-MM-DD format", "Default: Now") do |before|
           begin
-            DateTime.iso8601 before
+            DateTime.iso8601(before) && DateTime.parse(before)
           rescue
-            stderr.puts "please select a valid before date"
+            stderr.puts "Please select a valid before date in ISO8601 or YYYY-MM-DD format"
             return
           end
           options[:before] = DateTime.parse(before)
@@ -51,7 +50,7 @@ module Rdd
           if top =~ /^\d+$/
             options[:top] = top.to_i
           else
-            stderr.puts "please select a valid top integer value"
+            stderr.puts "Please select a valid top integer value"
             return
           end
         end
@@ -66,7 +65,7 @@ module Rdd
       opt_parser.parse!(argv)
 
       if options[:before] < options[:after]
-        stderr.puts "--before: #{options[:before]} must come after --after: #{options[:after]}"
+        stderr.puts "--before: #{options[:before].strftime('%F')} must come after --after: #{options[:after].strftime('%F')}"
         return
       end
 
