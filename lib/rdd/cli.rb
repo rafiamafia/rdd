@@ -14,11 +14,11 @@ module Rdd
         after:          nil,
         before:         nil,
         top:            nil,
-        client_id:      '28993007729-ncj0h0jqqvsrftqirb5khsmihciokh7q.apps.googleusercontent.com',
-        service_email:  '28993007729-ncj0h0jqqvsrftqirb5khsmihciokh7q@developer.gserviceaccount.com',
-        key:            File.expand_path('../../data/example-49a007fbf6a3.p12', __dir__),
-        project_id:     'example-1032',
-        dataset:        'https://bigquery.cloud.google.com/table/githubarchive:day.events_20150101',
+        'client_id'     => '28993007729-ncj0h0jqqvsrftqirb5khsmihciokh7q.apps.googleusercontent.com',
+        'service_email' => '28993007729-ncj0h0jqqvsrftqirb5khsmihciokh7q@developer.gserviceaccount.com',
+        'key'           => File.expand_path('../../data/example-49a007fbf6a3.p12', __dir__),
+        'project_id'    => 'example-1032',
+        'dataset'       =>'https://bigquery.cloud.google.com/table/githubarchive:day.events_20150101',
       }
 
       opt_parser = OptionParser.new do |opts|
@@ -69,7 +69,6 @@ module Rdd
         return
       end
 
-      #todo: sym_keys is an issue for BigQuery
       #Rdd::Client.new(options)
 
     end
