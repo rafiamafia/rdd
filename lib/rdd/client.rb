@@ -32,10 +32,14 @@ module Rdd
                    GROUP BY repo_name
                    LIMIT #{@opts[:top]}"
 
-      start_time = Time.now
-      raw_result = @bq.query sql_query
-      end_time = Time.now
-      { start: start_time, end: end_time, response: custom_result(raw_result['rows']) }
+      begin
+        start_time = Time.now
+        raw_result = @bq.query sql_query
+        end_time = Time.now
+        { start: start_time, end: end_time, response: custom_result(raw_result['rows']) }
+      rescue BigQuery::Errors::BigQueryError => e
+        raise RuntimeError.new(e.message)
+      end
     end
 
     def custom_result(arr)

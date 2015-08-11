@@ -42,10 +42,13 @@ module Rdd
       end
 
       stdout.puts "Getting Github statistics for #{options[:after].strftime('%F %T')} UTC - #{options[:before].strftime('%F %T')} UTC"
-      result = Rdd::Client.new(options).query
-      stdout.puts "Results (~#{(result[:end] - result[:start]).to_i} seconds):"
-
-      print result[:response]
+      begin
+        result = Rdd::Client.new(options).query
+        stdout.puts "Results (~#{(result[:end] - result[:start]).to_i} seconds):"
+        print result[:response]
+      rescue RuntimeError => e
+        stderr.puts "TIMEOUT ERROR\n: #{e.message}"
+      end
 
     end
 
