@@ -20,6 +20,21 @@ Or install it yourself as:
 
 ## Usage
 
+Help:
+
+` $ bin/rdd -h `
+
+```
+Options:
+-a, --after=AFTER                Date to start search at, ISO8601 or YYYY-MM-DD format
+                                 Default: 28 days ago
+-b, --before=BEFORE              ISO8601 Date to end search at, ISO8601 or YYYY-MM-DD format
+                                 Default: Now
+-t, --top=TOP                    The number of repos to show
+                                 Default 20
+-h, --help                       Displays Help
+```
+
 Example:
 
 `$ bin/rdd --after 2015-01-01 --before 2015-04-01`
