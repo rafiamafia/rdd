@@ -47,6 +47,14 @@ RSpec.describe Rdd::Cli do
 
       end
 
+      describe 'argument has invalid param' do
+
+        it 'displays an error' do
+          expect { described_class.setup ["--invalid"], $stdout, $stderr }.to output("invalid option: --invalid\n").to_stderr
+        end
+
+      end
+
     end
 
   end

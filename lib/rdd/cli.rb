@@ -59,7 +59,12 @@ module Rdd
         end
       end
 
-      opt_parser.parse!(argv)
+      begin
+        opt_parser.parse!(argv)
+      rescue OptionParser::InvalidOption => e
+        stderr.puts e.message
+        return
+      end
 
       if options[:before] < options[:after]
         stderr.puts "--before: #{options[:before].strftime('%F')} must come after --after: #{options[:after].strftime('%F')}"
