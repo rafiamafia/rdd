@@ -1,7 +1,5 @@
 # Rdd
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/rdd`. To experiment with that code, run `bin/console` for an interactive prompt.
-
 This gem is written to solve the following problem: https://gist.github.com/coryodaniel/61a2ebf7fe5086b69f36
 
 ## Installation
