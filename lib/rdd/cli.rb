@@ -76,7 +76,7 @@ module Rdd
 
     def self.print(response)
       line_no = 0
-      response.map { |repo_name, points| puts "#{line_no = line_no + 1} #{repo_name} - #{points} points" }
+      response.map { |repo_name, points| puts "##{line_no = line_no + 1} #{repo_name} - #{points} points" }
     end
 
   end
