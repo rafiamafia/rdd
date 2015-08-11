@@ -1,7 +1,4 @@
 require 'optparse'
-require 'open-uri'
-require 'zlib'
-require 'pry'
 require 'rdd/client'
 
 module Rdd
