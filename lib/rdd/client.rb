@@ -21,8 +21,7 @@ module Rdd
                     END) as sum
                    FROM
                    (
-                    SELECT type, repo.name as repo_name, actor.login,
-                    JSON_EXTRACT(payload, '$.action') as event,
+                    SELECT type, repo.name as repo_name,
                     FROM
                       (TABLE_DATE_RANGE([githubarchive:day.events_],
                         TIMESTAMP('#{@opts[:after].to_s}'),
