@@ -11,9 +11,9 @@ module Rdd
     def self.setup(argv, stdout, stderr)
 
       options = {
-        after:          nil,
-        before:         nil,
-        top:            nil,
+        after:          DateTime.now - 28,
+        before:         DateTime.now,
+        top:            20,
         'client_id'     => '28993007729-ncj0h0jqqvsrftqirb5khsmihciokh7q.apps.googleusercontent.com',
         'service_email' => '28993007729-ncj0h0jqqvsrftqirb5khsmihciokh7q@developer.gserviceaccount.com',
         'key'           => File.expand_path('../../data/example-49a007fbf6a3.p12', __dir__),
@@ -33,7 +33,6 @@ module Rdd
           end
           options[:after] = DateTime.parse(after)
         end
-        options[:after] ||= DateTime.now - 28
 
         opts.on("-b", "--before=BEFORE", "ISO8601 Date to end search at, ISO8601 or YYYY-MM-DD format", "Default: Now") do |before|
           begin
@@ -44,7 +43,6 @@ module Rdd
           end
           options[:before] = DateTime.parse(before)
         end
-        options[:before] ||= DateTime.now
 
         opts.on("-t", "--top=TOP", "The number of repos to show", "Default 20" ) do |top|
           if top =~ /^\d+$/
@@ -54,7 +52,6 @@ module Rdd
             return
           end
         end
-        options[:top] ||= 20
 
         opts.on("-h", "--help", "Displays Help") do
           stdout.puts opts
